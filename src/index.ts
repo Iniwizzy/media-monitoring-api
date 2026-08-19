@@ -1,10 +1,14 @@
 import express from 'express';
+import path from 'path';
 import mentionsBulkRouter from './routes/mentions.bulk';
 import mentionsRouter     from './routes/mentions';
 
 const app = express();
 
 app.use(express.json({ limit: '10mb' }));
+
+// Dashboard — serve public/index.html
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Routes
 app.use('/internal/mentions', mentionsBulkRouter);
